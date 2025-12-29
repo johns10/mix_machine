@@ -7,13 +7,13 @@ defmodule Mix.Tasks.Compile.Machine do
   ## Flags
 
    + `--format <format>` (`-f`) - output format, currently supported values are
-     `sarif` and `code_climate`, defaults to `sarif`.
+     `sarif`, `code_climate`, and `raw`, defaults to `sarif`.
    + `--output <path>` (`-o`) - output file, defaults to `report.json`.
    + `--pretty` - pretty print output.
 
   ## Options
 
-   + `:format` - atom `:sarif` or `:code_climate` that describes default format.
+   + `:format` - atom `:sarif`, `:code_climate`, or `:raw` that describes default format.
    + `:output` - default filename to produce output.
    + `:pretty` - boolean flag whether the output should be pretty printed.
    + `:root` - relative path to root directory, defaults to current working
@@ -55,6 +55,8 @@ defmodule Mix.Tasks.Compile.Machine do
         {_, _} = result -> result
         status -> {status, []}
       end
+
+    IO.inspect(diagnostics, label: :raw_diagnostics)
 
     File.write!(
       output,
