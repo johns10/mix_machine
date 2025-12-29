@@ -56,8 +56,6 @@ defmodule Mix.Tasks.Compile.Machine do
         status -> {status, []}
       end
 
-    IO.inspect(diagnostics, label: :raw_diagnostics)
-
     File.write!(
       output,
       formatter.render(diagnostics, %{
